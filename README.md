@@ -1,23 +1,22 @@
 # AI Academy: GitHub Copilot for Business Central
 
-This student repository contains a Business Central AL project and a self-assessment quiz.
+Welcome to the AI Academy course for Business Central developers. You will use this repository during the hands-on exercises to practise working with GitHub Copilot in VS Code and AL.
 
-## Repository Layout
+## Start Here
 
-- `business-central/`: the AL application, test application, and VS Code workspace.
-- `docs/`: the static quiz published with GitHub Pages.
+1. Clone or download this repository.
+2. Open [`business-central/business-central.code-workspace`](business-central/business-central.code-workspace) in VS Code.
+3. Follow the [Business Central project setup](business-central/README.md) to prepare your environment.
+4. Use the App and Test projects during the instructor-led exercises.
 
-## Business Central Project
+## Course Materials
 
-See [business-central/README.md](business-central/README.md) for setup and validation instructions.
+- `business-central/App/` contains the Follow-up extension used in the exercises.
+- `business-central/Test/` contains its automated tests.
+- `business-central/business-central.code-workspace` opens both AL projects together.
 
-## Quiz and GitHub Pages
+## Session 1 Knowledge Check
 
-The quiz files are stored in `docs/` and can be published directly with GitHub Pages. After Pages is enabled, open the [AI Academy quiz](https://global-mediator.github.io/ai-academy/).
+After Session 1, take the [Copilot Foundations Check](https://global-mediator.github.io/ai-academy/).
 
-1. Open the repository on GitHub and go to **Settings > Pages**.
-2. Under **Build and deployment**, select **Deploy from a branch**.
-3. Select the `main` branch and the `/docs` folder.
-4. Save the configuration and wait for GitHub to publish the site.
-
-Changes under `docs/` are published when they are pushed to `main`. No CI workflow is required, and the quiz does not submit or store students' answers.
+The quiz contains ten questions and explains each answer. Your answers are not submitted or stored, and you can retry the quiz at any time.
