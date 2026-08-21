@@ -1,0 +1,27 @@
+{
+  "id": "6dcf0cf9-3a05-4ba0-b0a2-f9c1f48ce855",
+  "name": "ACA Copilot Workshops",
+  "publisher": "AI Academy",
+  "version": "1.0.0.0",
+  "brief": "Hands-on GitHub Copilot workshops for Business Central developers.",
+  "description": "A self-contained AL extension used by the AI Academy workshop labs.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [],
+  "screenshots": [],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50199
+    }
+  ],
+  "runtime": "17.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}

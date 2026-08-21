@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="color-scheme" content="light dark">
+    <meta name="description" content="A self-assessment quiz for the first GitHub Copilot workshop session.">
+    <title>Copilot Foundations Check</title>
+
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%231f883d'/%3E%3Cpath d='M8 16.5l5.5 5.5L24 11' fill='none' stroke='%23fff' stroke-width='3.5' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+    <link rel="stylesheet" href="quiz.css">
+</head>
+<body>
+    <a class="skip-link" href="#question-text">Skip to the question</a>
+
+    <main class="quiz-shell">
+        <header class="quiz-header">
+            <div class="header-top">
+                <p class="eyebrow">AI Academy <span aria-hidden="true">/</span> Session 01</p>
+                <span class="self-check-badge">Self-assessment</span>
+            </div>
+            <h1 id="quiz-title">Copilot Foundations Check</h1>
+            <p class="intro">Ten questions on autocomplete, Copilot Chat, prompting, and context.</p>
+            <div class="progress-meta">
+                <span id="question-count">Question 1 of 10</span>
+                <span id="score-summary">0 correct</span>
+            </div>
+            <div class="progress-track" aria-hidden="true">
+                <div class="progress-bar" id="progress-bar"></div>
+            </div>
+        </header>
+
+        <section class="panel" id="question-panel" aria-labelledby="question-text">
+            <p class="question-kicker" id="question-topic"></p>
+            <h2 id="question-text" tabindex="-1"></h2>
+
+            <div class="options" id="options" role="group" aria-labelledby="question-text"></div>
+
+            <p class="kbd-hint">
+                <kbd>1</kbd>&ndash;<kbd>4</kbd> or <kbd>A</kbd>&ndash;<kbd>D</kbd> to answer
+                <span class="kbd-sep" aria-hidden="true">&middot;</span>
+                <kbd>Enter</kbd> forward
+                <span class="kbd-sep" aria-hidden="true">&middot;</span>
+                <kbd>Backspace</kbd> back
+            </p>
+
+            <div class="feedback" id="feedback" hidden>
+                <p class="feedback-result" id="feedback-result"></p>
+                <p class="feedback-copy" id="feedback-copy"></p>
+                <p class="correct-answer" id="correct-answer"></p>
+            </div>
+
+            <div class="actions">
+                <button class="button button-secondary" id="prev-button" type="button" disabled>
+                    <svg class="button-arrow button-arrow-left" viewBox="0 0 20 12" width="20" height="12" aria-hidden="true" focusable="false">
+                        <path d="M0 6h17M12 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    </svg>
+                    <span>Previous</span>
+                </button>
+                <button class="button" id="next-button" type="button" disabled>
+                    <span id="next-label">Choose an answer</span>
+                    <svg class="button-arrow" viewBox="0 0 20 12" width="20" height="12" aria-hidden="true" focusable="false">
+                        <path d="M0 6h17M12 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    </svg>
+                </button>
+            </div>
+        </section>
+
+        <section class="panel completion-panel" id="completion-panel" aria-labelledby="completion-title" hidden>
+            <p class="question-kicker">Session complete</p>
+            <p class="completion-mark" id="completion-mark"></p>
+            <p class="final-score" id="final-score"></p>
+            <h2 id="completion-title" tabindex="-1"></h2>
+            <p class="completion-message" id="completion-message"></p>
+            <div class="actions actions-start">
+                <button class="button" id="reset-button" type="button">Try again</button>
+                <button class="button button-secondary" id="review-button" type="button">
+                    <svg class="button-arrow button-arrow-left" viewBox="0 0 20 12" width="20" height="12" aria-hidden="true" focusable="false">
+                        <path d="M0 6h17M12 1l5 5-5 5" fill="none" stroke="currentColor" stroke-width="1.8"/>
+                    </svg>
+                    <span id="review-label">Review answers</span>
+                </button>
+            </div>
+        </section>
+
+        <footer class="quiz-footer">
+            <p class="footer-note">Nothing is submitted or stored. Reloading starts a fresh attempt.</p>
+            <button class="text-button" id="footer-reset-button" type="button">Reset quiz</button>
+        </footer>
+    </main>
+
+    <p class="sr-only" id="live-region" role="status" aria-live="polite"></p>
+
+    <script src="data/session-01.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>

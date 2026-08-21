@@ -1,0 +1,655 @@
+/* ============================================================================
+   AI Academy quiz — Primer-derived palette on the native system font stack, so
+   the quiz reads as part of the same world as github.com and VS Code.
+
+   Conventions and the reasoning behind them are documented in STYLE.md.
+   Two deliberate departures from stock Primer:
+     - interactive borders use --border-control, darker than Primer's #d1d9e0
+       (1.43:1), which would fail WCAG 1.4.11 for control boundaries;
+     - no webfont, no CDN, no external request of any kind.
+   ========================================================================== */
+
+:root {
+    color-scheme: light dark;
+
+    --canvas: #ffffff;
+    --canvas-subtle: #f6f8fa;
+
+    --fg: #1f2328;              /* 15.80:1 on canvas */
+    --fg-muted: #59636e;        /* 6.11:1 on canvas */
+
+    --border: #d1d9e0;          /* decorative dividers only */
+    --border-control: #868f99;  /* interactive boundaries, 3.28:1 */
+
+    --accent: #0969da;          /* 5.19:1 */
+    --accent-emphasis: #0969da;
+
+    --success: #1a7f37;         /* 5.08:1 */
+    --success-fg: #116329;      /* 6.64:1 on success-subtle */
+    --success-subtle: #dafbe1;
+    --success-emphasis: #1f883d;
+
+    --danger-fg: #a40e26;       /* 6.86:1 on danger-subtle */
+    --danger-subtle: #ffebe9;
+    --danger-emphasis: #cf222e;
+
+    --attention-fg: #7a5616;
+    --attention-subtle: #fff8c5;
+    --attention-border: #d4a72c;
+
+    --disabled-bg: #eaeef2;
+    --disabled-fg: #636c76;     /* 4.57:1 */
+
+    --on-emphasis: #ffffff;
+    --shadow-sm: 0 1px 0 rgba(31, 35, 40, 0.04);
+    --shadow-md: 0 3px 6px rgba(140, 149, 159, 0.15);
+
+    --radius: 6px;
+    --radius-lg: 12px;
+
+    --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif;
+    --mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+    :root {
+        --canvas: #0d1117;
+        --canvas-subtle: #151b23;
+
+        --fg: #f0f6fc;          /* 17.39:1 */
+        --fg-muted: #9198a1;    /* 6.50:1 */
+
+        --border: #3d444d;
+        --border-control: #6e7681;  /* 4.12:1 */
+
+        --accent: #4493f8;      /* 6.11:1 */
+        --accent-emphasis: #1f6feb;
+
+        --success: #3fb950;     /* 7.45:1 */
+        --success-fg: #3fb950;
+        --success-subtle: #0f2417;
+        --success-emphasis: #238636;
+
+        --danger-fg: #f85149;
+        --danger-subtle: #2a1416;
+        --danger-emphasis: #da3633;
+
+        --attention-fg: #d29922;
+        --attention-subtle: #272115;
+        --attention-border: #9e6a03;
+
+        --disabled-bg: #21262d;
+        --disabled-fg: #8b949e;  /* 4.95:1 */
+
+        --on-emphasis: #ffffff;
+        --shadow-sm: 0 0 transparent;
+        --shadow-md: 0 3px 6px rgba(1, 4, 9, 0.6);
+    }
+}
+
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+}
+
+body {
+    /* No min-width: the layout is fluid and min() handles the narrow end.
+       A fixed floor forced horizontal scroll below ~320px. */
+    min-height: 100vh;
+    margin: 0;
+    color: var(--fg);
+    background: var(--canvas);
+    font-family: var(--sans);
+    font-size: 1rem;
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+}
+
+button {
+    font: inherit;
+    color: inherit;
+}
+
+/* ── Focus & skip link ─────────────────────────────────────────────────── */
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+}
+
+.skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 10;
+    padding: 10px 14px;
+    border-radius: var(--radius);
+    color: var(--on-emphasis);
+    background: var(--accent-emphasis);
+    font-weight: 600;
+    text-decoration: none;
+    transform: translateY(-160%);
+    transition: transform 120ms ease;
+}
+
+.skip-link:focus-visible {
+    transform: translateY(0);
+}
+
+/* ── Shell & header ────────────────────────────────────────────────────── */
+
+.quiz-shell {
+    width: min(100% - 32px, 800px);
+    margin: 0 auto;
+    padding: 48px 0 32px;
+}
+
+.quiz-header {
+    margin-bottom: 24px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid var(--border);
+}
+
+.header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+}
+
+.eyebrow {
+    display: inline-flex;
+    align-items: center;
+    margin: 0;
+    color: var(--fg-muted);
+    font-size: 0.8125rem;
+    font-weight: 600;
+}
+
+.eyebrow span {
+    margin: 0 6px;
+    opacity: 0.6;
+}
+
+/* Primer "Label" component. */
+.self-check-badge {
+    flex: 0 0 auto;
+    padding: 0 8px;
+    border: 1px solid var(--attention-border);
+    border-radius: 2em;
+    color: var(--attention-fg);
+    background: var(--attention-subtle);
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 20px;
+}
+
+h1,
+h2 {
+    margin: 0;
+    font-family: inherit;
+}
+
+h1 {
+    max-width: 30ch;
+    overflow-wrap: break-word;
+    margin-top: 10px;
+    font-size: 1.5rem;
+    font-weight: 600;
+    line-height: 1.25;
+}
+
+.intro {
+    max-width: 62ch;
+    margin: 6px 0 0;
+    color: var(--fg-muted);
+    font-size: 0.9375rem;
+}
+
+.progress-meta {
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: 22px;
+    color: var(--fg-muted);
+    font-size: 0.8125rem;
+    font-weight: 500;
+}
+
+.progress-track {
+    height: 8px;
+    margin-top: 8px;
+    overflow: hidden;
+    border-radius: 2em;
+    background: var(--border);
+}
+
+.progress-bar {
+    width: 0;
+    height: 100%;
+    border-radius: 2em;
+    background: var(--success-emphasis);
+    transition: width 260ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* ── Panels ────────────────────────────────────────────────────────────── */
+
+.panel {
+    padding: clamp(20px, 4vw, 32px);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    background: var(--canvas);
+    box-shadow: var(--shadow-md);
+}
+
+.question-kicker {
+    margin: 0;
+    color: var(--fg-muted);
+    font-size: 0.75rem;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+h2 {
+    max-width: 46ch;
+    margin-top: 8px;
+    font-size: clamp(1.1875rem, 2.2vw, 1.5rem);
+    font-weight: 600;
+    line-height: 1.3;
+}
+
+/* #question-text and #completion-title receive focus programmatically so the
+   new content is announced. They are not in the tab order and are not
+   interactive, so a focus ring here would read as a rendering artefact rather
+   than a focus cue — the changed content is the cue. */
+h2:focus,
+h2:focus-visible {
+    outline: none;
+}
+
+/* ── Options ───────────────────────────────────────────────────────────── */
+
+.options {
+    display: grid;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+.option {
+    display: grid;
+    grid-template-columns: 22px 1fr;
+    align-items: start;
+    gap: 12px;
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border-control);
+    border-radius: var(--radius);
+    background: var(--canvas);
+    box-shadow: var(--shadow-sm);
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.option:hover:not(:disabled),
+.option:focus-visible:not(:disabled) {
+    border-color: var(--accent);
+    background: var(--canvas-subtle);
+}
+
+.option:disabled {
+    box-shadow: none;
+    cursor: default;
+}
+
+.option-label {
+    padding-top: 1px;
+}
+
+/* Radio-looking circle, drawn rather than imported. */
+.option-marker {
+    display: grid;
+    place-items: center;
+    width: 20px;
+    height: 20px;
+    margin-top: 2px;
+    border: 1px solid var(--border-control);
+    border-radius: 50%;
+    color: var(--fg-muted);
+    background: var(--canvas);
+    font-size: 0.6875rem;
+    font-weight: 600;
+}
+
+.option:hover:not(:disabled) .option-marker {
+    border-color: var(--accent);
+    color: var(--accent);
+}
+
+.option.is-correct {
+    border-color: var(--success-emphasis);
+    background: var(--success-subtle);
+}
+
+.option.is-correct .option-marker {
+    border-color: var(--success-emphasis);
+    color: var(--on-emphasis);
+    background: var(--success-emphasis);
+}
+
+.option.is-wrong {
+    border-color: var(--danger-emphasis);
+    background: var(--danger-subtle);
+}
+
+.option.is-wrong .option-marker {
+    border-color: var(--danger-emphasis);
+    color: var(--on-emphasis);
+    background: var(--danger-emphasis);
+}
+
+/* ── Keyboard hint ─────────────────────────────────────────────────────── */
+
+.kbd-hint {
+    margin: 12px 0 0;
+    color: var(--fg-muted);
+    font-size: 0.75rem;
+}
+
+kbd {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 1px 5px;
+    border: 1px solid var(--border);
+    border-bottom-width: 2px;
+    border-radius: var(--radius);
+    background: var(--canvas-subtle);
+    font-family: var(--mono);
+    font-size: 0.6875rem;
+    line-height: 16px;
+    text-align: center;
+}
+
+.kbd-sep {
+    margin: 0 6px;
+    opacity: 0.6;
+}
+
+/* ── Feedback (Primer "flash" callout) ─────────────────────────────────── */
+
+.feedback {
+    margin-top: 18px;
+    padding: 14px 16px;
+    border: 1px solid var(--success-emphasis);
+    border-radius: var(--radius);
+    background: var(--success-subtle);
+}
+
+.feedback.is-wrong {
+    border-color: var(--danger-emphasis);
+    background: var(--danger-subtle);
+}
+
+.feedback-result {
+    margin: 0;
+    color: var(--success-fg);
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.feedback.is-wrong .feedback-result {
+    color: var(--danger-fg);
+}
+
+.feedback-copy {
+    margin: 6px 0 0;
+    font-size: 0.9375rem;
+}
+
+.correct-answer {
+    margin: 8px 0 0;
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+/* ── Buttons ───────────────────────────────────────────────────────────── */
+
+.actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.actions-start {
+    justify-content: flex-start;
+}
+
+.button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 8px 16px;
+    border: 1px solid var(--success-emphasis);
+    border-radius: var(--radius);
+    color: var(--on-emphasis);
+    background: var(--success-emphasis);
+    cursor: pointer;
+    font-size: 0.875rem;
+    font-weight: 500;
+    transition: background-color 120ms ease, border-color 120ms ease;
+}
+
+.button:hover:not(:disabled) {
+    border-color: var(--success);
+    background: var(--success);
+}
+
+.button:disabled {
+    border-color: var(--border);
+    color: var(--disabled-fg);
+    background: var(--disabled-bg);
+    cursor: default;
+}
+
+/* Primer's default (non-primary) button: used for backwards navigation, which
+   should read as available but never as the expected next step. */
+.button-secondary {
+    border-color: var(--border-control);
+    color: var(--fg);
+    background: var(--canvas-subtle);
+}
+
+.button-secondary:hover:not(:disabled) {
+    border-color: var(--border-control);
+    background: var(--disabled-bg);
+}
+
+.button-secondary:disabled {
+    border-color: var(--border);
+    color: var(--disabled-fg);
+    background: var(--disabled-bg);
+}
+
+.button-arrow {
+    flex: 0 0 auto;
+    color: currentColor;
+    opacity: 0.85;
+}
+
+.button-arrow-left {
+    transform: scaleX(-1);
+}
+
+/* ── Completion ────────────────────────────────────────────────────────── */
+
+.completion-mark {
+    margin: 14px 0 0;
+    font-size: clamp(2.25rem, 7vw, 3.5rem);
+    font-weight: 600;
+    line-height: 1;
+    letter-spacing: -0.02em;
+    font-variant-numeric: tabular-nums;
+}
+
+.final-score {
+    margin: 6px 0 0;
+    color: var(--success-fg);
+    font-size: 0.9375rem;
+    font-weight: 600;
+}
+
+.completion-panel h2 {
+    margin-top: 22px;
+}
+
+.completion-message {
+    max-width: 62ch;
+    margin: 8px 0 0;
+    color: var(--fg-muted);
+}
+
+/* ── Footer ────────────────────────────────────────────────────────────── */
+
+.quiz-footer {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 18px;
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px solid var(--border);
+    color: var(--fg-muted);
+    font-size: 0.8125rem;
+}
+
+.footer-note {
+    margin: 0;
+}
+
+.text-button {
+    padding: 0;
+    border: 0;
+    color: var(--accent);
+    background: transparent;
+    cursor: pointer;
+    font-size: inherit;
+    font-weight: 500;
+}
+
+.text-button:hover {
+    text-decoration: underline;
+}
+
+/* ── Utilities ─────────────────────────────────────────────────────────── */
+
+.sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+[hidden] {
+    display: none !important;
+}
+
+/* ── Responsive ────────────────────────────────────────────────────────── */
+
+@media (max-width: 640px) {
+    .quiz-shell {
+        width: min(100% - 20px, 800px);
+        padding-top: 26px;
+    }
+
+    .header-top {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .panel {
+        padding: 18px 14px;
+    }
+
+    .option {
+        gap: 10px;
+        padding: 11px 12px;
+    }
+
+    .option-label,
+    .feedback-copy,
+    .correct-answer {
+        overflow-wrap: break-word;
+    }
+
+    /* Below ~300px the two buttons cannot share a row. Wrapping is better than
+       a 7px horizontal scroll, and letting them flex keeps the fit from being
+       decided by a single pixel of slack at 320px. */
+    .actions {
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .actions .button {
+        flex: 1 1 auto;
+    }
+
+    .quiz-footer {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 10px;
+    }
+}
+
+/* Very narrow: stack the action row deliberately with column-reverse, so the
+   primary action sits on top. Relying on flex-wrap alone would stack them in
+   DOM order and put Previous above Next. */
+@media (max-width: 359px) {
+    .actions {
+        align-items: stretch;
+        flex-direction: column-reverse;
+    }
+
+    .actions-start {
+        flex-direction: column;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    *,
+    *::before,
+    *::after {
+        scroll-behavior: auto !important;
+        transition-duration: 0.01ms !important;
+        animation-duration: 0.01ms !important;
+    }
+}
+
+@media print {
+    body {
+        background: #fff;
+    }
+
+    .panel {
+        border-color: #999;
+        box-shadow: none;
+    }
+
+    .actions,
+    .kbd-hint,
+    .text-button,
+    .progress-track,
+    .skip-link {
+        display: none !important;
+    }
+}

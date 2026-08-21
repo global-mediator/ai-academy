@@ -1,0 +1,34 @@
+{
+  "id": "3a899715-ae47-41f3-a223-7c3eb45e7a01",
+  "name": "ACA Copilot Workshops Test",
+  "publisher": "AI Academy",
+  "version": "1.0.0.0",
+  "brief": "Tests for the AI Academy workshop application.",
+  "description": "Test application for the self-contained Follow-up workshop scenario.",
+  "privacyStatement": "",
+  "EULA": "",
+  "help": "",
+  "url": "",
+  "logo": "",
+  "dependencies": [
+    {
+      "id": "6dcf0cf9-3a05-4ba0-b0a2-f9c1f48ce855",
+      "name": "ACA Copilot Workshops",
+      "publisher": "AI Academy",
+      "version": "1.0.0.0"
+    }
+  ],
+  "screenshots": [],
+  "platform": "28.0.0.0",
+  "application": "28.0.0.0",
+  "idRanges": [
+    {
+      "from": 50100,
+      "to": 50199
+    }
+  ],
+  "runtime": "17.0",
+  "features": [
+    "NoImplicitWith"
+  ]
+}
