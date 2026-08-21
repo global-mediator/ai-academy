@@ -10,7 +10,13 @@ codeunit 50101 "ACA Follow-up Demo"
     var
         FollowUp: Record "ACA Follow-up";
     begin
-        // TODO Create and insert a follow-up using Validate for every field.
+        FollowUp.Init();
+        FollowUp.Validate("No.", FollowUpNo);
+        FollowUp.Validate("Contact Name", ContactName);
+        ValidateFollowUpDate(FollowUpDate);
+        FollowUp.Validate("Follow-up Date", FollowUpDate);
+        FollowUp.Validate(Completed, false);
+        FollowUp.Insert(true);
     end;
 
     /// <summary>
@@ -22,7 +28,10 @@ codeunit 50101 "ACA Follow-up Demo"
     var
         FollowUp: Record "ACA Follow-up";
     begin
-        // TODO Filter incomplete follow-ups up to DueDate and return their count. 
+        FollowUp.SetRange(Completed, false);
+        FollowUp.SetRange("Follow-up Date", 0D, DueDate);
+
+        exit(FollowUp.Count());
     end;
 
     /// <summary>
@@ -30,10 +39,11 @@ codeunit 50101 "ACA Follow-up Demo"
     /// </summary>
     /// <param name="FollowUpDate">The date when the follow-up is due.</param>
     procedure ValidateFollowUpDate(FollowUpDate: Date)
+    var
+        FollowUpDateBeforeWorkDateErr: Label 'The follow-up date cannot be before the work date.';
     begin
-        // TODO Add error label
         if FollowUpDate < WorkDate() then
-            Error();
+            Error(FollowUpDateBeforeWorkDateErr);
     end;
 
 

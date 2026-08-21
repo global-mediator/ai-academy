@@ -76,4 +76,104 @@ codeunit 50110 "ACA Follow-up Tests"
         if FollowUp.IsOverdue(WorkDate()) then
             Error(FollowUpWasOverdueErr);
     end;
+
+    [Test]
+    procedure GivenPersistedUndatedFollowUpWhenDateFixIsAppliedThenDateIsSaved()
+    var
+        FollowUp: Record "ACA Follow-up";
+        PromptLesson: Codeunit "ACA Prompt Lesson";
+        ValidationErrorInfo: ErrorInfo;
+        CustomDimensions: Dictionary of [Text, Text];
+        ExpectedFollowUpDate: Date;
+        FollowUpDateDimensionKeyTok: Label 'AsOfDate', Locked = true;
+        FollowUpDateNotSavedErr: Label 'The actionable error did not save the follow-up date.';
+    begin
+        ExpectedFollowUpDate := WorkDate() + 1;
+        FollowUp.Init();
+        FollowUp.Validate("No.", 'FIX-001');
+        FollowUp.Validate("Contact Name", 'Ada Lovelace');
+        FollowUp.Insert();
+
+        ValidationErrorInfo.RecordId(FollowUp.RecordId());
+        CustomDimensions.Add(FollowUpDateDimensionKeyTok, Format(ExpectedFollowUpDate, 0, 9));
+        ValidationErrorInfo.CustomDimensions(CustomDimensions);
+
+        PromptLesson.SetFollowUpDateFromError(ValidationErrorInfo);
+
+        Clear(FollowUp);
+        if not FollowUp.Get('FIX-001') then
+            Error(FollowUpDateNotSavedErr);
+
+        if FollowUp."Follow-up Date" <> ExpectedFollowUpDate then
+            Error(FollowUpDateNotSavedErr);
+    end;
+
+    [Test]
+    procedure GivenPersistedCompletedFollowUpWhenReopenFixIsAppliedThenFollowUpIsOpen()
+    var
+        FollowUp: Record "ACA Follow-up";
+        PromptLesson: Codeunit "ACA Prompt Lesson";
+        ValidationErrorInfo: ErrorInfo;
+        FollowUpNotReopenedErr: Label 'The actionable error did not reopen the follow-up.';
+    begin
+        FollowUp.Init();
+        FollowUp.Validate("No.", 'FIX-002');
+        FollowUp.Validate("Contact Name", 'Grace Hopper');
+        FollowUp.Validate("Follow-up Date", WorkDate());
+        FollowUp.Validate(Completed, true);
+        FollowUp.Insert();
+
+        ValidationErrorInfo.RecordId(FollowUp.RecordId());
+
+        PromptLesson.ReopenFollowUpFromError(ValidationErrorInfo);
+
+        Clear(FollowUp);
+        if not FollowUp.Get('FIX-002') then
+            Error(FollowUpNotReopenedErr);
+
+        if FollowUp.Completed then
+            Error(FollowUpNotReopenedErr);
+    end;
+
+    [Test]
+    procedure GivenMissingReminderDateWhenValidatedThenReminderDateErrorIsRaised()
+    var
+        FollowUp: Record "ACA Follow-up";
+        PromptLesson: Codeunit "ACA Prompt Lesson";
+        ValidationUnexpectedlySucceededErr: Label 'Validation unexpectedly succeeded.';
+        ReminderDateRequiredErr: Label 'A reminder date is required.';
+    begin
+        FollowUp.Init();
+
+        if TryValidateForReminder(PromptLesson, FollowUp, 0D) then
+            Error(ValidationUnexpectedlySucceededErr);
+
+        if GetLastErrorText() <> ReminderDateRequiredErr then
+            Error(ValidationUnexpectedlySucceededErr);
+    end;
+
+    [Test]
+    procedure GivenUnsavedUndatedFollowUpWhenValidatedThenDateErrorIsRaisedWithoutFix()
+    var
+        FollowUp: Record "ACA Follow-up";
+        PromptLesson: Codeunit "ACA Prompt Lesson";
+        ValidationUnexpectedlySucceededErr: Label 'Validation unexpectedly succeeded.';
+        FollowUpDateRequiredErr: Label 'A follow-up date is required.';
+    begin
+        FollowUp.Init();
+        FollowUp.Validate("No.", 'UNSAVED-001');
+        FollowUp.Validate("Contact Name", 'Katherine Johnson');
+
+        if TryValidateForReminder(PromptLesson, FollowUp, WorkDate()) then
+            Error(ValidationUnexpectedlySucceededErr);
+
+        if GetLastErrorText() <> FollowUpDateRequiredErr then
+            Error(ValidationUnexpectedlySucceededErr);
+    end;
+
+    [TryFunction]
+    local procedure TryValidateForReminder(PromptLesson: Codeunit "ACA Prompt Lesson"; FollowUp: Record "ACA Follow-up"; AsOfDate: Date)
+    begin
+        PromptLesson.ValidateForReminder(FollowUp, AsOfDate);
+    end;
 }
