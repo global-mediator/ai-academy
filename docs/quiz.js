@@ -31,7 +31,7 @@
 
     if (!quiz || !Array.isArray(quiz.questions) || quiz.questions.length === 0) {
         elements.questionTopic.textContent = "Question data unavailable";
-        elements.questionText.textContent = "The question set failed to load. Check that data/session-01.js is present.";
+        elements.questionText.textContent = "The question set failed to load. Check that the quiz data file is present.";
         return;
     }
 
@@ -48,12 +48,15 @@
     };
 
     /* Outcome bands: [minimum percentage, heading, message]. First match wins. */
-    const OUTCOMES = [
+    const DEFAULT_OUTCOMES = [
         [90, "Solid foundation.", "You are ready for the first lab. Keep the same habit in VS Code: predict what the model will miss, run the prompt, then compare the answer against the source."],
         [70, "Good grasp of the essentials.", "The core ideas are in place. Re-read the explanations for the ones you missed before the first lab."],
         [50, "The main ideas are landing.", "Revisit context boundaries and validation. Those two decide whether Copilot helps or quietly costs you time."],
         [0, "Worth another pass.", "Read the explanations, then run the questions again. Nothing here is graded and nothing is stored."]
     ];
+    const outcomes = Array.isArray(quiz.outcomes) && quiz.outcomes.length > 0
+        ? quiz.outcomes
+        : DEFAULT_OUTCOMES;
 
     const currentQuestion = () => quiz.questions[state.questionIndex];
     const currentPick = () => state.picks[state.questionIndex];
@@ -218,7 +221,7 @@
     function renderCompletion() {
         const finalCount = score();
         const percentage = Math.round((finalCount / total) * 100);
-        const band = OUTCOMES.find((entry) => percentage >= entry[0]);
+        const band = outcomes.find((entry) => percentage >= entry[0]);
 
         elements.questionPanel.hidden = true;
         elements.completionPanel.hidden = false;
