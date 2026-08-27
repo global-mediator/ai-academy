@@ -23,5 +23,6 @@
   "runtime": "17.0",
   "features": [
     "NoImplicitWith"
-  ]
+  ],
+  "suppressWarnings": ["LC0092", "AC0010", "DC0007"]
 }

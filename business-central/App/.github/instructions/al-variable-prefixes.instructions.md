@@ -8,10 +8,10 @@ applyTo: "src/Session2/**/*.al"
 
 - Prefix every variable declared in a procedure-level `var` block with `l`.
 - Prefix every variable declared in an object-level `var` block with `g`.
+- Prefix every parameter with `p`.
 - Follow the prefix with a descriptive PascalCase name, for example `lCustomer` and `gServiceUrlErr`.
 - Treat label variables like other variables: their declaration scope determines their prefix.
-- Do not prefix procedure parameters, return values, fields, procedures, or object names.
-- When modifying existing Session 2 code, rename affected variables consistently throughout the touched object.
+- Do not prefix return values, fields, procedures, or object names.
 
 ```al
 codeunit 50100 "Example Processor"
