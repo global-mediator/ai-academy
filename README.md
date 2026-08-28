@@ -20,3 +20,9 @@ Welcome to the AI Academy course for Business Central developers. You will use t
 After Session 1, take the [Copilot Foundations Check](https://global-mediator.github.io/ai-academy/).
 
 The quiz contains ten questions and explains each answer. Your answers are not submitted or stored, and you can retry the quiz at any time.
+
+## Session 2 Knowledge Check
+
+After Session 2, take the [Instructions, Skills, and Prompts Check](https://global-mediator.github.io/ai-academy/session-02.html).
+
+The quiz contains ten questions and explains each answer. Your answers are not submitted or stored, and you can retry the quiz at any time.
