@@ -19,6 +19,10 @@ Participants can use GitHub Copilot in VS Code to understand AL, write a focused
 - `Test/`: a separate test application, as required by the AL project structure guidance.
 - `business-central.code-workspace`: opens both AL projects in VS Code.
 
+Application and test sources are grouped by course session. Session 1 contains the original Follow-up exercises. Session 2 adds an intentionally non-production-ready reminder integration for instruction, skill, and prompt demonstrations.
+
+Session 2 workspace customizations are stored under `App/.github/` so VS Code discovers them when `App` is opened as a root of the multi-root course workspace.
+
 ## Validation Commands
 
 Use the VS Code AL commands to download symbols, package, publish, and run the test app against a sandbox. Treat Copilot output as a proposal: package it, run the relevant test, and review the diff before keeping it.

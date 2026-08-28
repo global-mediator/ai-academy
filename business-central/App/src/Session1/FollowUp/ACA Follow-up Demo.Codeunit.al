@@ -31,9 +31,10 @@ codeunit 50101 "ACA Follow-up Demo"
     /// <param name="FollowUpDate">The date when the follow-up is due.</param>
     procedure ValidateFollowUpDate(FollowUpDate: Date)
     begin
-        // TODO Add error label
-        if FollowUpDate < WorkDate() then
-            Error();
+        if FollowUpDate >= WorkDate() then
+            exit;
+
+        // TODO Tell the user that the follow-up date cannot be in the past.
     end;
 
 
