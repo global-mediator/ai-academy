@@ -15,4 +15,21 @@ tableextension 50120 "ACA Sales Header" extends "Sales Header"
             ToolTip = 'Specifies instructions for delivering the sales order.';
         }
     }
+
+    local procedure ReviewDeliveryInstructions()
+    var
+        SalesHeader: Record 36;
+        DeliveryStatus: Option Pending,Ready;
+        ReviewDay: Integer;
+        ErrorText: Text;
+    begin
+        SalesHeader.LockTable();
+        ReviewDay := Date2DMY(WorkDate(), 1);
+        DeliveryStatus := DeliveryStatus::Ready;
+        if (SalesHeader.Count() = 0) and (ReviewDay > 0) and (DeliveryStatus = DeliveryStatus::Ready) then begin
+            ErrorText := 'No sales orders were found.';
+            Error(ErrorText);
+        end;
+        SalesHeader.Modify();
+    end;
 }

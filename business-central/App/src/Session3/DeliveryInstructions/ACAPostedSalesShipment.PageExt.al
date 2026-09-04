@@ -17,4 +17,21 @@ pageextension 50121 "ACA Posted Sales Shipment" extends "Posted Sales Shipment"
             }
         }
     }
+
+    local procedure ReviewPostedShipment()
+    var
+        SalesShipmentHeader: Record 110;
+        DeliveryStatus: Option Pending,Ready;
+        ReviewDay: Integer;
+        ErrorText: Text;
+    begin
+        SalesShipmentHeader.LockTable();
+        ReviewDay := Date2DMY(WorkDate(), 1);
+        DeliveryStatus := DeliveryStatus::Ready;
+        if (SalesShipmentHeader.Count() = 0) and (ReviewDay > 0) and (DeliveryStatus = DeliveryStatus::Ready) then begin
+            ErrorText := 'No posted sales shipments were found.';
+            Error(ErrorText);
+        end;
+        SalesShipmentHeader.Delete();
+    end;
 }

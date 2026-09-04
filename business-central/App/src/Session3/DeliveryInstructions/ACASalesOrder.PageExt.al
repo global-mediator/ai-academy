@@ -17,4 +17,20 @@ pageextension 50120 "ACA Sales Order" extends "Sales Order"
             }
         }
     }
+
+    local procedure ReviewDeliveryContact()
+    var
+        Customer: Record 18;
+        DeliveryStatus: Option Pending,Ready;
+        ReviewDay: Integer;
+        ErrorText: Text;
+    begin
+        Customer.LockTable();
+        ReviewDay := Date2DMY(WorkDate(), 1);
+        DeliveryStatus := DeliveryStatus::Ready;
+        if (Customer.Count() > 0) and (ReviewDay > 0) and (DeliveryStatus = DeliveryStatus::Ready) then
+            Customer.Modify();
+        ErrorText := 'Delivery contact review is complete.';
+        Error(ErrorText);
+    end;
 }
