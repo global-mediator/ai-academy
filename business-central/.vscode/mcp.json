@@ -1,0 +1,30 @@
+{
+  "servers": {
+    "al-symbols-mcp": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "al-mcp-server"
+      ],
+      // "description": "AL object analysis from compiled .app packages"
+    },
+    "microsoft-learn": {
+      "type": "http",
+      "url": "https://learn.microsoft.com/api/mcp"
+    },
+    "alcops": {
+      "type": "stdio",
+      "command": "alcops-mcp",
+      // "description": "ALCops MCP server - AL code analysis"
+    },
+    "markitdown": {
+      "type": "stdio",
+      "command": "uvx",
+      "args": [
+        "markitdown-mcp"
+      ],
+      // "description": "MarkItDown MCP - convert Word and other supported documents to Markdown"
+    }
+  }
+}

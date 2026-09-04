@@ -15,6 +15,8 @@ Welcome to the AI Academy course for Business Central developers. You will use t
 - `business-central/Test/` contains its automated tests.
 - `business-central/business-central.code-workspace` opens both AL projects together.
 
+Session 3 adds a self-contained delivery-instructions exercise for practising MCP setup, document conversion, official documentation retrieval, AL symbol investigation, deterministic analysis, and enterprise governance.
+
 ## Session 1 Knowledge Check
 
 After Session 1, take the [Copilot Foundations Check](https://global-mediator.github.io/ai-academy/).
@@ -24,5 +26,11 @@ The quiz contains ten questions and explains each answer. Your answers are not s
 ## Session 2 Knowledge Check
 
 After Session 2, take the [Instructions, Skills, and Prompts Check](https://global-mediator.github.io/ai-academy/session-02.html).
+
+The quiz contains ten questions and explains each answer. Your answers are not submitted or stored, and you can retry the quiz at any time.
+
+## Session 3 Knowledge Check
+
+After Session 3, take the [MCP Servers and Tools Check](https://global-mediator.github.io/ai-academy/session-03.html).
 
 The quiz contains ten questions and explains each answer. Your answers are not submitted or stored, and you can retry the quiz at any time.
