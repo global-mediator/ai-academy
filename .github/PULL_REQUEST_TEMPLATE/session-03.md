@@ -1,38 +1,29 @@
-## Session 3: MCP workflow
+## Session 3 homework
 
-### Summary
+### Your task
 
-<!-- What behavior did you implement? -->
+Complete the delivery-instructions feature in `business-central/App/src/Session3/DeliveryInstructions` according to the provided requirements document.
 
-### Requirements and evidence
+### Ask Copilot
 
-| Acceptance criterion | Implementation | Test or validation evidence |
-| --- | --- | --- |
-| Delivery contact is required when instructions are present |  |  |
-| Validation explains how to correct the order |  |  |
-| Both fields transfer to the posted shipment |  |  |
-| Both fields appear on the relevant pages |  |  |
+Open Copilot Chat in **Agent** mode and use this prompt:
 
-### MCP evidence
+> Complete the Session 3 delivery-instructions homework. Use MarkItDown MCP to read the requirements document, then inspect the starter AL files in `App/src/Session3/DeliveryInstructions`. Use AL Symbols MCP to find a supported posting event, and use Microsoft Learn MCP if you need to verify current AL guidance. Implement the required validation and copy both delivery fields to the posted sales shipment. Use a Label for the actionable error message. Keep the change limited to this feature, run ALCops on the changed AL files, and package the App project. Explain the changes when finished.
 
-| Server and tool | Why it was used | What it established |
-| --- | --- | --- |
-| MarkItDown / `convert_to_markdown` |  |  |
-| Microsoft Learn /  |  |  |
-| AL Symbols /  |  |  |
-| ALCops / `analyze` |  |  |
+Review Copilot's changes before keeping them. Ask it to explain code you do not understand.
 
-Microsoft Learn source: <!-- title and URL -->
+### Check your result
 
-### Validation
+- [ ] Delivery contact is required when delivery instructions are entered.
+- [ ] The error explains how to correct the order.
+- [ ] Both delivery fields are copied to the posted sales shipment.
+- [ ] The App project packages successfully.
+- [ ] Only files needed for this feature are committed.
 
-- [ ] App project compiles
-- [ ] Test project compiles
-- [ ] Focused tests pass
-- [ ] ALCops analysis rerun after fixes
-- [ ] Diff reviewed
-- [ ] No secrets, machine-specific paths, generated `.app` files, or converted requirements committed
+### Submit your homework
 
-### Governance assessment
+1. Commit and push the changes to your branch.
+2. Open a pull request.
+3. Submit the pull request without adding screenshots, tests, evidence tables, or chat transcripts.
 
-<!-- Paste the completed table and answers from App/src/Session3/GOVERNANCE.md. -->
+A GitHub agent will compare your code with the reference implementation and provide feedback.

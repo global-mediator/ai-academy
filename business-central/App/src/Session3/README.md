@@ -71,9 +71,9 @@ Start with search or summary tools. Retrieve a full definition only when the sum
 
 ### 3. Verify guidance with Microsoft Learn
 
-Use `microsoft_docs_search` for current guidance on AL table extensions, page extensions, event subscribers, and validation. Fetch the most relevant official page with `microsoft_docs_fetch`. Use code sample search only when an official sample is useful.
+Ask the agent to use Microsoft Learn for current guidance on AL table extensions, page extensions, event subscribers, and validation. The server can search official documentation, retrieve a complete page when more context is useful, and find official code samples.
 
-Do not treat search snippets as the complete source. Record the title and URL of at least one fetched Microsoft Learn page in the pull request.
+Review the guidance the agent uses before accepting its implementation.
 
 ### 4. Complete the implementation
 
@@ -83,41 +83,42 @@ The starter already adds the two fields to sales orders and posted sales shipmen
 2. The error must tell the user how to correct the order and must use a `Label`.
 3. Posting a shipment must copy both fields to the posted sales shipment.
 4. The implementation must extend standard behavior through supported extension points.
-5. Add focused tests for validation and field transfer in the Test project.
 
 ### 5. Analyze, inspect, fix, verify
 
-Run ALCops `analyze` on the Session 3 files. For each relevant diagnostic:
+Run ALCops `analyze` on the Session 3 files. Read the reported rules and ask the agent to explain anything you do not understand. If you apply a suggested fix, review the change before keeping it.
 
-1. Read the rule and inspect the reported location.
-2. Use `get_fixes` when a fix is available.
-3. Review the offered change before using `apply_fix`.
-4. Run `analyze` again after any fix.
-5. Package the App and Test projects and run the focused tests.
-
-`apply_fix` and `apply_fix_all` write files. Keep explicit approval enabled for both.
+Package the App project when the implementation is complete. `apply_fix` and `apply_fix_all` write files, so keep explicit approval enabled for both.
 
 ## Homework
 
-Complete the guided scenario in your own branch and submit it as a pull request. Use the Session 3 pull request template and include:
+Complete the delivery-instructions feature in your own branch:
 
-- the working App and Test changes;
-- a requirement-to-evidence table;
-- the MCP tools used and what each established;
-- one fetched Microsoft Learn URL;
-- build, test, and analyzer results;
-- the completed governance assessment.
+1. Require a delivery contact when delivery instructions are entered.
+2. Show an actionable validation error stored in a `Label`.
+3. Copy the delivery contact and instructions to the posted sales shipment.
+4. Use supported Business Central extension points without modifying standard objects.
 
-Screenshots and chat transcripts are optional supporting evidence, not substitutes for code and validation. Do not commit generated Markdown from the Word conversion, secrets, personal configuration, package caches, or `.app` files.
+Open Copilot Chat in **Agent** mode and use this prompt:
+
+> Complete the Session 3 delivery-instructions homework. Use MarkItDown MCP to read the requirements document, then inspect the starter AL files in `App/src/Session3/DeliveryInstructions`. Use AL Symbols MCP to find a supported posting event, and use Microsoft Learn MCP if you need to verify current AL guidance. Implement the required validation and copy both delivery fields to the posted sales shipment. Use a Label for the actionable error message. Keep the change limited to this feature, run ALCops on the changed AL files, and package the App project. Explain the changes when finished.
+
+Review Copilot's changes and ask it to explain anything you do not understand. When the App packages successfully, commit and push your changes, then open a pull request using the Session 3 template. You do not need to add tests, screenshots, chat transcripts, or evidence tables.
+
+A GitHub agent will compare your submission with the reference implementation and provide feedback. Do not commit generated Markdown from the Word conversion, secrets, personal configuration, package caches, or `.app` files.
 
 ## Definition of done
 
-- All acceptance criteria from the Word document are addressed.
-- App and Test projects compile.
-- Focused tests pass.
-- Relevant analyzer diagnostics are resolved or justified.
-- The PR contains enough evidence for a reviewer to reproduce the work.
+- Delivery contact is required when delivery instructions are entered.
+- The validation message tells the user how to correct the order.
+- Both fields are copied to the posted sales shipment.
+- The App project packages successfully.
+- Only the files needed for the exercise are committed.
 - No credentials or machine-specific paths are committed.
+
+## Knowledge check
+
+After the session, take the [MCP Servers and Tools Check](https://global-mediator.github.io/ai-academy/session-03.html). The quiz contains ten questions, does not submit or store answers, and can be retried at any time.
 
 ## References
 

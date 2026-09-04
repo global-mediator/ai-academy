@@ -45,15 +45,15 @@ window.quizData = {
         },
         {
             topic: "Microsoft Learn",
-            question: "After Microsoft Learn search returns a promising result, what is the best next step for an implementation decision?",
+            question: "Which capabilities does the Microsoft Learn MCP server provide in this session?",
             options: [
-                "Use the search snippet as the complete source.",
-                "Fetch the official page and verify the relevant guidance in context.",
-                "Replace the source with an unauthenticated forum answer.",
-                "Assume the model already knows the current behavior."
+                "Searching official documentation, retrieving complete documentation pages, and finding official code samples.",
+                "Compiling AL projects and publishing extensions to Business Central.",
+                "Converting local Word documents and editing their contents.",
+                "Analyzing compiled .app packages and applying AL code fixes."
             ],
-            correct: 1,
-            feedback: "Search gives breadth. Fetch the official page when the decision depends on complete, current guidance."
+            correct: 0,
+            feedback: "Microsoft Learn MCP gives the agent access to official Microsoft documentation through search, full-page retrieval, and code-sample search tools."
         },
         {
             topic: "AL Symbols",
@@ -65,7 +65,7 @@ window.quizData = {
                 "The user's Jira permissions."
             ],
             correct: 1,
-            feedback: "AL Symbols indexes compiled packages, making dependency contracts visible even when their source is not in the repository."
+            feedback: "AI coding assistants cannot normally see compiled AL packages or understand Business Central object relationships, creating a blind spot in AL development. The AL MCP Server bridges this gap by exposing the workspace's compiled symbols (.app files) through the Model Context Protocol, making dependency contracts visible even when their source is not in the repository."
         },
         {
             topic: "Efficient retrieval",
@@ -83,13 +83,13 @@ window.quizData = {
             topic: "ALCops",
             question: "Which ALCops operations require special care because they can modify repository files?",
             options: [
-                "list_rules and analyze",
-                "analyze and get_fixes",
-                "apply_fix and apply_fix_all",
-                "Every search result from Microsoft Learn"
+                "Listing the available rules and analyzing the project.",
+                "Analyzing the project and reviewing available fixes.",
+                "Applying an individual fix or applying all available fixes.",
+                "Reading search results from Microsoft Learn."
             ],
             correct: 2,
-            feedback: "The apply operations write changes to disk. Inspect the fix and retain explicit approval before applying it."
+            feedback: "Applying a fix changes files on disk, whether you apply one fix or all available fixes. Review the proposed changes and require explicit approval before applying them."
         },
         {
             topic: "Tool governance",
@@ -104,28 +104,28 @@ window.quizData = {
             feedback: "Limit both capability and approval duration. Server trust does not mean every tool invocation should be permanently approved."
         },
         {
-            topic: "Enterprise control",
-            question: "Which control best supports a governed enterprise MCP catalogue?",
+            topic: "Troubleshooting",
+            question: "What should you do first if a configured MCP server fails to start in VS Code?",
             options: [
-                "Allow any package name as long as it starts through npx.",
-                "Use a curated registry with ownership, version review, and lifecycle management.",
-                "Ask every developer to maintain a private list with no central review.",
-                "Disable source control for MCP configuration."
+                "Open MCP: List Servers, select the server, and inspect Show Output.",
+                "Delete the shared MCP configuration and recreate it from memory.",
+                "Enable every MCP tool and approve all future actions.",
+                "Reinstall VS Code before checking the error message."
             ],
-            correct: 1,
-            feedback: "A curated registry makes approved servers discoverable while supporting ownership, review, updates, and retirement."
+            correct: 0,
+            feedback: "The server output shows the actual launch or connection error. Check it first so you can fix the specific command, prerequisite, path, or network problem."
         },
         {
-            topic: "MCP and CLI",
-            question: "Why might an enterprise prioritize an approved MCP tool over giving an agent unrestricted CLI access?",
+            topic: "Tool capabilities",
+            question: "If an agent's dedicated file-editing tool is disabled, can the agent still modify files?",
             options: [
-                "MCP guarantees that every server is secure.",
-                "CLI commands cannot return structured data.",
-                "An MCP tool exposes a named, schema-defined capability that can be enabled, approved, and governed independently.",
-                "MCP removes the need for code review and CI."
+                "No. Disabling that tool removes every possible way to write files.",
+                "Yes. Another enabled tool may execute Python or a command that writes files.",
+                "Only when the files are stored in a GitHub repository.",
+                "Only when an MCP server is listed in the workspace configuration."
             ],
-            correct: 2,
-            feedback: "MCP creates a structured control surface. Its safety still depends on the server, permissions, configuration, and enterprise controls."
+            correct: 1,
+            feedback: "Tools are interfaces, not complete capability boundaries. Disabling one editing tool does not prevent file changes if another enabled tool can run code or commands with write access. Consider the combined capabilities and permissions of all enabled tools."
         }
     ]
 };
