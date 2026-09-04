@@ -14,9 +14,7 @@ Review Copilot's changes before keeping them. Ask it to explain code you do not 
 
 ### Check your result
 
-- [ ] Delivery contact is required when delivery instructions are entered.
-- [ ] The error explains how to correct the order.
-- [ ] Both delivery fields are copied to the posted sales shipment.
+- [ ] All acceptance criteria in the requirements document are implemented.
 - [ ] The App project packages successfully.
 - [ ] Only files needed for this feature are committed.
 
