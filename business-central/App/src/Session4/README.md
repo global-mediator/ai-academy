@@ -82,7 +82,7 @@ Select **AI Academy AL Developer** in the agent picker. Copy this prompt into th
 Implement the Session 4 escalation feature in `App/src/Session4/Escalation`. Add a Boolean field `Escalated` to `ACA Support Ticket`. Add `EscalateOverdueTickets(AsOfDate: Date; GraceDays: Integer): Integer` to `ACA Ticket Escalation`. It must escalate each open, not yet escalated ticket that is overdue beyond the grace period, and return the number of escalated tickets. Reuse the existing overdue check. Compile the App project when you finish.
 ```
 
-While the Developer works, find the subagent call in the chat and expand it. Alt+click the call to open the subagent chat next to the main chat. The subagent chat is read-only. Answer these questions:
+While the Developer works, find the subagent call in the chat and select it to expand it. Answer these questions:
 
 - Which prompt did the Developer send to the Compiler?
 - Which result did the Compiler return?
@@ -112,24 +112,24 @@ Make one change at a time. Run the same prompt again after each change, then und
 
 ## Homework
 
-Add tests for the escalation boundary with the same agents:
+Create an explore subagent that the Developer can call to research the code before it makes a change.
 
-1. Select **AI Academy AL Developer** and ask it to add tests to the Test project for acceptance checks 4 and 5.
-2. Check that the Developer calls the Compiler twice: first for App, then for Test.
-3. Hand off to the Reviewer and ask it to check that the tests cover the boundary on 4 and 5 January.
-4. Commit only the files needed for the exercise, push your branch, and open a pull request.
+You decide how the agent works: its name, its instructions, its tools, what it returns, and when the Developer calls it. Use the three agents in `App/.github/agents/` as examples, and change the Developer if your design needs it.
+
+When you finish, show that the Developer called your subagent during a real task. Commit only the files needed for the exercise, push your branch, and open a pull request. In the pull request description, explain your design choices in a few sentences.
 
 ## Definition of done
 
 - `EscalateOverdueTickets` escalates only open tickets that are overdue by more than the grace period.
 - The boundary example in acceptance check 4 gives the expected result.
-- The App project compiles. The Test project compiles if you did the homework.
+- The App project compiles.
 - You can explain the difference between the Compiler call and the Reviewer handoff.
+- The Developer calls your explore subagent during a task.
 - Only the files needed for the exercise are committed.
 
 ## Knowledge check
 
-After the session, take the [Agents, Subagents, and Handoffs Check](https://global-mediator.github.io/ai-academy/session-04.html). The quiz contains ten questions, does not submit or store answers, and can be retried at any time.
+After the session, take the [Agents, Subagents, and Handoffs Check](https://global-mediator.github.io/ai-academy/session-04.html). The quiz contains fourteen questions, does not submit or store answers, and can be retried at any time.
 
 ## References
 

@@ -17,6 +17,8 @@ Welcome to the AI Academy course for Business Central developers. You will use t
 
 Session 3 adds a self-contained delivery-instructions exercise for practising MCP setup, document conversion, official documentation retrieval, AL symbol investigation, deterministic analysis, and enterprise governance.
 
+Session 4 adds a support-ticket escalation exercise for practising custom agents, subagent calls, and handoffs.
+
 ## Session 1 Knowledge Check
 
 After Session 1, take the [Copilot Foundations Check](https://global-mediator.github.io/ai-academy/).
@@ -34,3 +36,9 @@ The quiz contains ten questions and explains each answer. Your answers are not s
 After Session 3, take the [MCP Servers and Tools Check](https://global-mediator.github.io/ai-academy/session-03.html).
 
 The quiz contains ten questions and explains each answer. Your answers are not submitted or stored, and you can retry the quiz at any time.
+
+## Session 4 Knowledge Check
+
+After Session 4, take the [Agents, Subagents, and Handoffs Check](https://global-mediator.github.io/ai-academy/session-04.html).
+
+The quiz contains fourteen questions and explains each answer. Your answers are not submitted or stored, and you can retry the quiz at any time.
