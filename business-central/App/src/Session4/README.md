@@ -76,9 +76,11 @@ The feature in this session uses these acceptance checks:
 
 ### 3. Watch a subagent call
 
-Select **AI Academy AL Developer** and send this prompt:
+Select **AI Academy AL Developer** in the agent picker. Copy this prompt into the chat and send it:
 
-> Implement the Session 4 escalation feature in `App/src/Session4/Escalation`. Add a Boolean field `Escalated` to `ACA Support Ticket`. Add `EscalateOverdueTickets(AsOfDate: Date; GraceDays: Integer): Integer` to `ACA Ticket Escalation`. It must escalate each open, not yet escalated ticket that is overdue beyond the grace period, and return the number of escalated tickets. Reuse the existing overdue check. Compile the App project when you finish.
+```text
+Implement the Session 4 escalation feature in `App/src/Session4/Escalation`. Add a Boolean field `Escalated` to `ACA Support Ticket`. Add `EscalateOverdueTickets(AsOfDate: Date; GraceDays: Integer): Integer` to `ACA Ticket Escalation`. It must escalate each open, not yet escalated ticket that is overdue beyond the grace period, and return the number of escalated tickets. Reuse the existing overdue check. Compile the App project when you finish.
+```
 
 While the Developer works, find the subagent call in the chat and expand it. Alt+click the call to open the subagent chat next to the main chat. The subagent chat is read-only. Answer these questions:
 
