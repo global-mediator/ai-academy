@@ -7,11 +7,6 @@ argument-hint: "AL files or change to review"
 user-invocable: true
 disable-model-invocation: true
 agents: []
-handoffs:
-  - label: Fix the findings
-    agent: AI Academy AL Developer
-    prompt: "Fix the blocker and major findings from the review above. Keep the change limited to those findings. Delegate compilation again and report which findings you fixed and which you did not."
-    send: false
 tools: [read, ms-dynamics-smb.al/al_symbolsearch, ms-dynamics-smb.al/al_get_diagnostics, ms-dynamics-smb.al/al_symbolrelations, SShadowSdk.al-lsp-for-agents/bclsp_goToDefinition, SShadowSdk.al-lsp-for-agents/bclsp_hover, SShadowSdk.al-lsp-for-agents/bclsp_findReferences, SShadowSdk.al-lsp-for-agents/bclsp_prepareCallHierarchy, SShadowSdk.al-lsp-for-agents/bclsp_incomingCalls, SShadowSdk.al-lsp-for-agents/bclsp_outgoingCalls, SShadowSdk.al-lsp-for-agents/bclsp_codeLens, SShadowSdk.al-lsp-for-agents/bclsp_codeQualityDiagnostics, SShadowSdk.al-lsp-for-agents/bclsp_documentSymbols, SShadowSdk.al-lsp-for-agents/bclsp_symbolRelations, SShadowSdk.al-lsp-for-agents/bclsp_inspectPage, search, 'al-symbols-mcp/*', alcops/list_rules, alcops/analyze, alcops/get_fixes]
 ---
 

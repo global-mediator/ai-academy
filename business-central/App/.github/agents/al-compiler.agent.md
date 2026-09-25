@@ -28,14 +28,19 @@ App and Test from the active editor or current terminal directory.
 
 1. Read the project's `.vscode/settings.json` and resolve `al.packageCachePath`.
 2. Confirm that the resolved folder contains the symbol packages that the manifest requires.
-3. Use the project's existing build configuration.
-4. For Test, require the caller to state that App compiled with `PASS` in this session.
-5. Run one build attempt for the requested project.
-6. Confirm that the build output identifies the requested project before reporting success.
+3. For Test, require the caller to state that App compiled with `PASS` in this session.
+4. Call `al_build` once with `scope: all`. The tool has no project parameter,
+   and `scope: current` builds whichever project the active editor belongs to.
+   `scope: all` builds App and Test in dependency order, independent of the editor.
+5. Keep only the diagnostics whose file path is inside the requested project
+   folder. Ignore diagnostics from the other project.
+
+Return `PASS` when the tool reports a completed build and no errors remain for
+the requested project. Return `FAIL` when errors remain for the requested project.
 
 If required guidance, symbols, or dependency evidence is unavailable, return
 `BLOCKED`. Report the missing prerequisite without inventing a build procedure.
-If the build targets another project or lacks a confirmed result, return `BLOCKED`.
+If the tool reports no completion result, return `BLOCKED`.
 Do not retry or switch projects within the same invocation.
 
 ## Boundaries
