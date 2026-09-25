@@ -19,7 +19,7 @@ Participants can use GitHub Copilot in VS Code to understand AL, write a focused
 - `Test/`: a separate test application, as required by the AL project structure guidance.
 - `business-central.code-workspace`: opens both AL projects in VS Code.
 
-Application and test sources are grouped by course session. Session 1 contains the original Follow-up exercises. Session 2 adds an intentionally non-production-ready reminder integration for instruction, skill, and prompt demonstrations. Session 3 adds a self-contained sales delivery-instructions exercise built around existing MCP servers and enterprise governance.
+Application and test sources are grouped by course session. Session 1 contains the original Follow-up exercises. Session 2 adds an intentionally non-production-ready reminder integration for instruction, skill, and prompt demonstrations. Session 3 adds a self-contained sales delivery-instructions exercise built around existing MCP servers and enterprise governance. Session 4 adds a support-ticket escalation exercise that shows subagent calls and handoffs between the custom agents in `App/.github/agents/`.
 
 Session 2 workspace customizations are stored under `App/.github/` so VS Code discovers them when `App` is opened as a root of the multi-root course workspace. Session 3 MCP server configuration is shared through `.vscode/mcp.json` in this Business Central workspace folder; credentials and machine-specific paths remain user-specific.
 
