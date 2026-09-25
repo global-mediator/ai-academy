@@ -6,8 +6,11 @@ permissionset 50100 "ACA Follow-up"
         tabledata "ACA Follow-up" = RIMD,
         table "ACA Reminder Setup" = X,
         tabledata "ACA Reminder Setup" = RIMD,
+        table "ACA Support Ticket" = X,
+        tabledata "ACA Support Ticket" = RIMD,
         codeunit "ACA Follow-up Mgt." = X,
         codeunit "ACA Follow-up Demo" = X,
         codeunit "ACA Prompt Lesson" = X,
-        codeunit "ACA Reminder Dispatcher" = X;
+        codeunit "ACA Reminder Dispatcher" = X,
+        codeunit "ACA Ticket Escalation" = X;
 }
